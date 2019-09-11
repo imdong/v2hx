@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         v2ex 和谐插件
 // @namespace    https://github.com/imdong/v2hx?u
-// @version      0.1
+// @version      0.2
 // @description  世界本该和谐
 // @author       青石
 // @match        https://www.v2ex.com/t/*
@@ -63,17 +63,24 @@
             return true;
         },
         /**
+         *  逐级遍历子节点
+         * @param {child} child
+         */
+        replaceChild: function (child, id) {
+            if (child.nodeType == 3) {
+                child.textContent = _v2hx.decode(child.textContent);
+            } else {
+                child.childNodes.forEach(_v2hx.replaceChild);
+            }
+        },
+        /**
          * 解码正文 / 评论的内容
          */
         decodeText: function () {
             if (location.pathname.substr(0, 3) != '/t/') return;
             // 评论回复
-            $('.topic_content,.reply_content').each(function (index, item) {
-                item.childNodes.forEach(function (child, id) {
-                    if (child.nodeType == 3) {
-                        child.textContent = _v2hx.decode(child.textContent);
-                    }
-                });
+            $('.topic_content,.markdown_body,.reply_content').each(function (index, item) {
+                item.childNodes.forEach(_v2hx.replaceChild);
             });
         },
         /**

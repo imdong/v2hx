@@ -32,7 +32,7 @@
          * @param {string} content 待处理的文本内容
          */
         encode: function (content) {
-            let result = content.replace(/~~([!@#$%^&])([^~]+)~~/g, function (match_full, type, content, offset, string) {
+            let result = content.replace(/(?<!`)~~([!@#$%^&])([^~]+)~~(?!`)/g, function (match_full, type, content, offset, string) {
                 // 对于 type 做备用，暂不处理
                 return "[v2hx::" + _v2hx.str2b64(content) + "]";
             });

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         v2ex 和谐插件
 // @namespace    https://github.com/imdong/v2hx?u
-// @version      0.2
+// @version      0.3
 // @description  世界本该和谐
 // @author       青石
 // @match        https://www.v2ex.com/t/*
@@ -94,6 +94,6 @@
         }
     };
 
-    _v2hx.init();
+    // _v2hx.init();
     window.v2hx = _v2hx;
 })(window, jQuery);
